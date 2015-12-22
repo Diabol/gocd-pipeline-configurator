@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # import the standard JSON parser
-import json, yaml, ConfigParser, os, json, requests
+import json, yaml, ConfigParser, os, json, requests, sys
 # import the REST library
 from restful_lib import Connection
 
@@ -10,9 +10,12 @@ PIPELINE_DIR_OPTION_NAME = "pipeline_dir"
 
 options = {}
 
+
+
 def parseConfigFile():
     config = ConfigParser.ConfigParser()
-    config.read('../config/.config.ini')
+
+    config.read(os.getcwd() + '/.config.ini')
     for section in config.sections():
         if section == CONFIG_SECTION:
             for option in config.options(section):
@@ -29,6 +32,10 @@ def createPipeline(file_name):
 
 
 #Main
-parseConfigFile()
-for file_name in os.listdir(options['pipeline_dir']):
-    createPipeline(file_name)
+def main(argv):
+    parseConfigFile()
+    for file_name in os.listdir(options['pipeline_dir']):
+        createPipeline(file_name)
+
+if __name__ == "__main__":
+   main(sys.argv[1:])
