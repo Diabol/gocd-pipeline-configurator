@@ -1,16 +1,11 @@
 #!/usr/bin/env python
-# import the standard JSON parser
+
 import json, yaml, ConfigParser, os, json, requests, sys
-# import the REST library
-from restful_lib import Connection
 
 CONFIG_SECTION = "default"
 BASE_URL_OPTION_NAME  = "gocd_base_url"
 PIPELINE_DIR_OPTION_NAME = "pipeline_dir"
-
 options = {}
-
-
 
 def parseConfigFile():
     config = ConfigParser.ConfigParser()
