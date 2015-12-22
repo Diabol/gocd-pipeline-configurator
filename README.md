@@ -6,7 +6,7 @@ Since gocd 1.5.3 it's possible to create pipelines using the pipeline config api
 To try it out:
 
 1. Clone this repo
-2. Edit config/.config.ini file
-3. run gocd-pipeline-configurator.py
+2. Edit .config.ini file
+3. run gocd-pipeline-configurator.sh
 
-There's an example pipeline.yaml in the examples dir.
+There's an example pipeline.yaml in the examples dir. The example assumes that template 'build' already exists in gocd.
