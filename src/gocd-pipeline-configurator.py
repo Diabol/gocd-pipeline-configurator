@@ -12,7 +12,7 @@ options = {}
 
 def parseConfigFile():
     config = ConfigParser.ConfigParser()
-    config.read('./.config.ini')
+    config.read('../config/.config.ini')
     for section in config.sections():
         if section == CONFIG_SECTION:
             for option in config.options(section):
