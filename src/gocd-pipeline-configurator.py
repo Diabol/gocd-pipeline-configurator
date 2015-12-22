@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # import the standard JSON parser
 import json, yaml, ConfigParser, os, json, requests, sys
 # import the REST library
