@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-
 import json, yaml, ConfigParser, os, json, requests, sys
 
 CONFIG_SECTION = "default"
@@ -22,9 +21,10 @@ def createPipeline(file_name):
     file_path = options[PIPELINE_DIR_OPTION_NAME] + "/" + file_name
     yaml_data = yaml.load(open(file_path))
     json_data = json.dumps(yaml_data)
+    print json_data
     headers = {'Accept': 'application/vnd.go.cd.v1+json', 'Content-Type': 'application/json'}
-    print requests.post(create_url, data=json_data, auth=(options['api_username'], options['api_password']), headers=headers)
-
+    response = requests.post(create_url, data=json_data, auth=(options['api_username'], options['api_password']), headers=headers)
+    print response
 
 #Main
 def main(argv):
