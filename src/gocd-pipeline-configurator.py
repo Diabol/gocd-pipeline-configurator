@@ -42,6 +42,7 @@ def editPipeline(file_path, pipeline_name, etag):
 
 
 def createPipeline(file_path):
+    create_url = options[BASE_URL_OPTION_NAME] + "/go/api/admin/pipelines"
     yaml_data = yaml.load(open(file_path))
     json_data = json.dumps(yaml_data)
     headers = {'Accept': 'application/vnd.go.cd.v1+json', 'Content-Type': 'application/json'}
