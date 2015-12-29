@@ -32,11 +32,11 @@ def createOrEditPipeline(pipeline):
     if  etag == None:
         createPipeline(pipeline)
     else:
-        editPipeline(pipeline, pipeline_name, etag)
+        editPipeline(pipeline, etag)
 
-def editPipeline(pipeline, pipeline_name, etag):
+def editPipeline(pipeline, etag):
     json_data = json.dumps(pipeline)
-    edit_url = options[BASE_URL_OPTION_NAME] + "/go/api/admin/pipelines/" + pipeline_name
+    edit_url = options[BASE_URL_OPTION_NAME] + "/go/api/admin/pipelines/" + pipeline['pipeline']['name']
     headers = {'Accept': 'application/vnd.go.cd.v1+json', 'Content-Type': 'application/json', "If-Match": etag}
     response = requests.put(edit_url, data=json_data, auth=(options['api_username'], options['api_password']), headers=headers)
 
