@@ -1,2 +1,2 @@
 #/usr/bin/env sh
-./src/gocd-pipeline-configurator.py
+./bin/gocd-pipeline-configurator.py

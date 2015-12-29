@@ -1,22 +1,40 @@
 ---
-group: defaultGroup
-pipeline:
-    label_template: ${COUNT}
-    enable_pipeline_locking: false
-    name: hello-world-build
-    template: build
-    materials:
-      -
-        type: git
-        attributes:
-          url: https://github.com/dennisgranath/HelloWorld.git
-          branch: master
-          destination: null
-          filter: null
-          name: null
-          auto_update: false
-          submodule_folder: null
-    parameters:
-      -
-        name: BRANCH
-        value: master
+pipelines:
+  - group: defaultGroup
+    pipeline:
+        label_template: ${COUNT}
+        enable_pipeline_locking: false
+        name: hello-world-build-1
+        template: build
+        materials:
+          - type: git
+            attributes:
+              url: https://github.com/dennisgranath/HelloWorld.git
+              branch: master
+              destination: null
+              filter: null
+              name: null
+              auto_update: false
+              submodule_folder: null
+        parameters:
+          - name: BRANCH
+            value: master
+  - group: defaultGroup
+    pipeline:
+        label_template: ${COUNT}
+        enable_pipeline_locking: false
+        name: hello-world-build-2
+        template: build
+        materials:
+          - type: git
+            attributes:
+              url: https://github.com/dennisgranath/HelloWorld.git
+              branch: master
+              destination: null
+              filter: null
+              name: null
+              auto_update: false
+              submodule_folder: null
+        parameters:
+          - name: BRANCH
+            value: master
