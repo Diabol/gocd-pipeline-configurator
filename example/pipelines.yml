@@ -20,10 +20,11 @@ pipelines:
           - name: BRANCH
             value: master
   - group: defaultGroup
+    yaml_template: apa
     pipeline:
         label_template: ${COUNT}
         enable_pipeline_locking: false
-        name: hello-world-build-2
+        name: hello-world-build-4
         template: build
         materials:
           - type: git
@@ -38,3 +39,5 @@ pipelines:
         parameters:
           - name: BRANCH
             value: master
+templates:
+  - apa: apa
