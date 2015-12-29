@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import json, yaml, ConfigParser, os, json, requests, sys, getopt
-from classes.pipeline import Pipeline
+
 
 CONFIG_SECTION = "default"
 BASE_URL_OPTION_NAME  = "gocd_base_url"
