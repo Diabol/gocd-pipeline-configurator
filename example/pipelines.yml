@@ -20,7 +20,6 @@ pipelines:
           - name: BRANCH
             value: master
   - group: defaultGroup
-    yaml_template: apa
     pipeline:
         label_template: ${COUNT}
         enable_pipeline_locking: false
@@ -39,5 +38,3 @@ pipelines:
         parameters:
           - name: BRANCH
             value: master
-templates:
-  - apa: apa
