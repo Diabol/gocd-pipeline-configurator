@@ -12,11 +12,7 @@ pipelines:
             attributes:
               url: https://github.com/dennisgranath/HelloWorld.git
               branch: master
-              destination: null
-              filter: null
-              name: null
               auto_update: false
-              submodule_folder: null
         parameters:
           - name: BRANCH
             value: master
@@ -31,11 +27,7 @@ pipelines:
             attributes:
               url: https://github.com/dennisgranath/HelloWorld.git
               branch: master
-              destination: null
-              filter: null
-              name: null
               auto_update: false
-              submodule_folder: null
         parameters:
           - name: BRANCH
             value: master
