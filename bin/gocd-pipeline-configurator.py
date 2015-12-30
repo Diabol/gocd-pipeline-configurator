@@ -9,7 +9,6 @@ options = {}
 
 def parseConfigFile(path):
     config = ConfigParser.ConfigParser()
-
     config.read(path)
     for section in config.sections():
         if section == CONFIG_SECTION:
@@ -21,7 +20,6 @@ def getEtag(pipeline_name):
     get_url = options[BASE_URL_OPTION_NAME] + "/go/api/admin/pipelines/" + pipeline_name
     headers = {'Accept': 'application/vnd.go.cd.v1+json'}
     response = requests.get(get_url, auth=(options['api_username'], options['api_password']), headers=headers)
-
     if response.status_code == 200:
         return response.headers['etag']
     return None
