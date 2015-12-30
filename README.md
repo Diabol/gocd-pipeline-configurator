@@ -7,6 +7,7 @@ To try it out:
 
 1. Clone this repo
 2. Edit .config.ini file
-3. run gocd-pipeline-configurator.sh
+3. pip install requests
+4. run gocd-pipeline-configurator.sh
 
 There's an example pipelines.yml in the examples dir. The example assumes that template 'build' already exists in gocd.
