@@ -14,7 +14,21 @@ pipelines:
             auto_update: false
       parameters:
         - name: ECHO_PARAM
-          value: hello
+          value: hello1
+  - group: echo-build
+    yaml_template: echo-build
+    pipeline:
+      label_template: ${COUNT}
+      name: echo-build-2
+      materials:
+        - type: git
+          attributes:
+            url: https://github.com/dennisgranath/HelloWorld.git
+            branch: master
+            auto_update: false
+      parameters:
+        - name: ECHO_PARAM
+          value: hello2
 
 templates:
   echo-build:
@@ -26,4 +40,7 @@ templates:
               tasks:
                 - type: exec
                   attributes:
-                    command: 'ls #{ECHO_PARAM}'
+                    command: '/bin/bash'
+                    arguments:
+                      - -c
+                      - 'echo #{ECHO_PARAM}'
