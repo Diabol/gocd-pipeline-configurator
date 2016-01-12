@@ -1,0 +1,14 @@
+templates:
+  echo-build:
+    pipeline:
+      stages:
+        - name: Build
+          jobs:
+            - name: build
+              tasks:
+                - type: exec
+                  attributes:
+                    command: '/bin/bash'
+                    arguments:
+                      - -c
+                      - 'echo #{ECHO_PARAM}'

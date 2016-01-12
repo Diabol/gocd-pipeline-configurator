@@ -66,11 +66,14 @@ def createPipeline(pipeline):
 def createPipelines(filename):
     file_path = options[PIPELINE_DIR_OPTION_NAME] + "/" + filename
     yaml_data = yaml.load(open(file_path))
-    pipelines = yaml_data['pipelines']
+
     if 'templates' in yaml_data:
         templates.update(yaml_data['templates'])
-    for pipeline in pipelines:
-        createOrEditPipeline(pipeline)
+        
+    if 'pipelines' in yaml_data:
+        pipelines = yaml_data['pipelines']
+        for pipeline in pipelines:
+            createOrEditPipeline(pipeline)
 
 def getDefaultConfig():
     working_dir_conf = os.getcwd() + "/.config.ini"
