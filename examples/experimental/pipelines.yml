@@ -1,0 +1,29 @@
+---
+# A list of pipelines where each item is a YAML representation of https://api.go.cd/current/#the-pipeline-config-object
+pipelines:
+  - group: echo-build
+    yaml_template: echo-build
+    pipeline:
+      label_template: ${COUNT}
+      name: echo-build-1
+      materials:
+        - type: git
+          attributes:
+            url: https://github.com/dennisgranath/HelloWorld.git
+            branch: master
+            auto_update: false
+      parameters:
+        - name: ECHO_PARAM
+          value: hello
+
+templates:
+  echo-build:
+    pipeline:
+      stages:
+        - name: Build
+          jobs:
+            - name: build
+              tasks:
+                - type: exec
+                  attributes:
+                    command: 'ls #{ECHO_PARAM}'

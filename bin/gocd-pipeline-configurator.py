@@ -6,6 +6,8 @@ CONFIG_SECTION = "default"
 BASE_URL_OPTION_NAME  = "gocd_base_url"
 PIPELINE_DIR_OPTION_NAME = "pipeline_dir"
 options = {}
+templates = {}
+
 
 def parseConfigFile(path):
     config = ConfigParser.ConfigParser()
@@ -33,22 +35,40 @@ def createOrEditPipeline(pipeline):
         editPipeline(pipeline, etag)
 
 def editPipeline(pipeline, etag):
-    json_data = json.dumps(pipeline)
     edit_url = options[BASE_URL_OPTION_NAME] + "/go/api/admin/pipelines/" + pipeline['pipeline']['name']
+    if 'yaml_template' in pipeline:
+        if not pipeline['yaml_template'] in templates:
+            print "Error: No such template '" + pipeline['yaml_template']+ "'. Skipping " + pipeline['pipeline']['name']
+            return
+        template = templates[pipeline['yaml_template']]
+        pipeline = merge(pipeline, template)
+    json_data = json.dumps(pipeline)
     headers = {'Accept': 'application/vnd.go.cd.v1+json', 'Content-Type': 'application/json', "If-Match": etag}
     response = requests.put(edit_url, data=json_data, auth=(options['api_username'], options['api_password']), headers=headers)
-
+    if not response.status_code == 200:
+       print "Error: Could not edit pipeline " + pipeline['pipeline']['name'] + ": " + response.text
 
 def createPipeline(pipeline):
     create_url = options[BASE_URL_OPTION_NAME] + "/go/api/admin/pipelines"
+    if 'yaml_template' in pipeline:
+        if not pipeline['yaml_template'] in templates:
+            print "Error: No such template '" + pipeline['yaml_template']+ "'. Skipping " + pipeline['pipeline']['name']
+            return
+        template = templates[pipeline['yaml_template']]
+        pipeline = merge(pipeline, template)
+
     json_data = json.dumps(pipeline)
     headers = {'Accept': 'application/vnd.go.cd.v1+json', 'Content-Type': 'application/json'}
     response = requests.post(create_url, data=json_data, auth=(options['api_username'], options['api_password']), headers=headers)
+    if not response.status_code == 200:
+       print "Error: Could not create pipeline " + pipeline['pipeline']['name'] + ": " + response.text
 
 def createPipelines(filename):
     file_path = options[PIPELINE_DIR_OPTION_NAME] + "/" + filename
     yaml_data = yaml.load(open(file_path))
     pipelines = yaml_data['pipelines']
+    if 'templates' in yaml_data:
+        templates.update(yaml_data['templates'])
     for pipeline in pipelines:
         createOrEditPipeline(pipeline)
 
@@ -57,6 +77,15 @@ def getDefaultConfig():
     if os.path.isfile(working_dir_conf):
         return working_dir_conf
     return None
+
+def merge(pipeline, template):
+    if isinstance(pipeline,dict) and isinstance(template,dict):
+        for k,v in template.iteritems():
+            if k not in pipeline:
+                pipeline[k] = v
+            else:
+                pipeline[k] = merge(pipeline[k],v)
+    return pipeline
 
 #Main
 def main(argv):
