@@ -8,7 +8,7 @@ templates:
               tasks:
                 - type: exec
                   attributes:
-                    command: '/bin/bash'
+                    command: /bin/bash
                     arguments:
                       - -c
-                      - 'echo #{ECHO_PARAM}'
+                      - echo #{ECHO_PARAM}
