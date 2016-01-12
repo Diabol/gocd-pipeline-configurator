@@ -10,7 +10,7 @@ To try it out:
 3. pip install requests
 4. run gocd-pipeline-configurator.sh
 
-There's an example pipelines.yml in the examples dir. The example assumes that template 'build' already exists in gocd.
+There's an example pipelines.yml in the examples/example1 dir. The example assumes that template 'build' already exists in GoCD. You can also checkout my other exsample using 'yaml templates' in the examples/template_example dir. In this example the resulting pipeline will be the merged result of the pipeline hash and the template hash.
 
 ## Development
 
