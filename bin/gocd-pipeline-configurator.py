@@ -69,7 +69,6 @@ def createPipelines(filename):
 
     if 'templates' in yaml_data:
         templates.update(yaml_data['templates'])
-        print templates
 
     if 'pipelines' in yaml_data:
         pipelines = yaml_data['pipelines']
