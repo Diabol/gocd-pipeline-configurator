@@ -36,11 +36,11 @@ def createOrEditPipeline(pipeline):
 
 def editPipeline(pipeline, etag):
     edit_url = options[BASE_URL_OPTION_NAME] + "/go/api/admin/pipelines/" + pipeline['pipeline']['name']
-    if 'yaml_template' in pipeline:
-        if not pipeline['yaml_template'] in templates:
-            print "Error: No such template '" + pipeline['yaml_template']+ "'. Skipping " + pipeline['pipeline']['name']
+    if 'pipeline_template' in pipeline:
+        if not pipeline['pipeline_template'] in templates:
+            print "Error: No such template '" + pipeline['pipeline_template']+ "'. Skipping " + pipeline['pipeline']['name']
             return
-        template = templates[pipeline['yaml_template']]
+        template = templates[pipeline['pipeline_template']]
         pipeline = merge(pipeline, template)
     json_data = json.dumps(pipeline)
     headers = {'Accept': 'application/vnd.go.cd.v1+json', 'Content-Type': 'application/json', "If-Match": etag}
@@ -50,11 +50,11 @@ def editPipeline(pipeline, etag):
 
 def createPipeline(pipeline):
     create_url = options[BASE_URL_OPTION_NAME] + "/go/api/admin/pipelines"
-    if 'yaml_template' in pipeline:
-        if not pipeline['yaml_template'] in templates:
-            print "Error: No such template '" + pipeline['yaml_template']+ "'. Skipping " + pipeline['pipeline']['name']
+    if 'pipeline_template' in pipeline:
+        if not pipeline['pipeline_template'] in templates:
+            print "Error: No such template '" + pipeline['pipeline_template']+ "'. Skipping " + pipeline['pipeline']['name']
             return
-        template = templates[pipeline['yaml_template']]
+        template = templates[pipeline['pipeline_template']]
         pipeline = merge(pipeline, template)
 
     json_data = json.dumps(pipeline)
@@ -69,7 +69,8 @@ def createPipelines(filename):
 
     if 'templates' in yaml_data:
         templates.update(yaml_data['templates'])
-        
+        print templates
+
     if 'pipelines' in yaml_data:
         pipelines = yaml_data['pipelines']
         for pipeline in pipelines:

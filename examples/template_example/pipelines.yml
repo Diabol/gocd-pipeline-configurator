@@ -2,7 +2,7 @@
 # A list of pipelines where each item is a YAML representation of https://api.go.cd/current/#the-pipeline-config-object
 pipelines:
   - group: echo-build
-    yaml_template: echo-build
+    pipeline_template: echo-build
     pipeline:
       label_template: ${COUNT}
       name: echo-build-1
@@ -16,7 +16,7 @@ pipelines:
         - name: ECHO_PARAM
           value: hello1
   - group: echo-build
-    yaml_template: echo-build
+    pipeline_template: echo-build
     pipeline:
       label_template: ${COUNT}
       name: echo-build-2
@@ -29,7 +29,6 @@ pipelines:
       parameters:
         - name: ECHO_PARAM
           value: hello2
-
 templates:
   echo-build:
     pipeline:
@@ -40,7 +39,7 @@ templates:
               tasks:
                 - type: exec
                   attributes:
-                    command: '/bin/bash'
+                    command: /bin/bash
                     arguments:
                       - -c
-                      - 'echo #{ECHO_PARAM}'
+                      - echo #{ECHO_PARAM}
