@@ -1,4 +1,7 @@
 # gocd-pipeline-configurator
+I've ported this to golang for easy install:
+https://github.com/dennisgranath/gocd-plumber
+
 Create GoCD pipelines from yaml code.
 
 Since GoCD 1.5.3 it's possible to create pipelines using the pipeline config api. This is an initial effort to have something similiar to jenkins job builder for gocd. Please don't use it anywhere near a production server.
